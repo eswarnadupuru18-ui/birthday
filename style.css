@@ -1,0 +1,433 @@
+/* ===========================
+   RESET
+=========================== */
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Poppins',sans-serif;
+}
+
+html{
+scroll-behavior:smooth;
+}
+
+body{
+
+background:linear-gradient(135deg,#ffdde1,#ee9ca7);
+
+overflow-x:hidden;
+
+color: #2e2e2e;;
+
+text-align:center;
+
+min-height:100vh;
+
+}
+
+/* ===========================
+HEART BACKGROUND
+=========================== */
+
+.hearts{
+
+position:fixed;
+
+top:0;
+left:0;
+
+width:100%;
+height:100%;
+
+pointer-events:none;
+
+overflow:hidden;
+
+z-index:-1;
+
+}
+
+/* ===========================
+INTRO
+=========================== */
+
+#intro{
+
+height:100vh;
+
+display:flex;
+
+justify-content:center;
+
+align-items:center;
+
+background:linear-gradient(135deg,#ff8fb1,#ffb6c1);
+
+}
+
+.overlay{
+
+text-align:center;
+
+padding:20px;
+
+}
+
+.welcome{
+
+font-size:48px;
+
+margin-bottom:25px;
+
+text-shadow:0 0 20px #8b0000;
+
+animation:glow 2s infinite alternate;
+
+}
+
+.introText{
+
+margin-top:25px;
+
+font-size:28px;
+
+color:#4E342E;
+
+}
+
+/* ===========================
+PUPPY
+=========================== */
+#puppyBox{
+    position:relative;
+    display:inline-block;
+}
+#puppy{
+
+width:230px;
+
+animation:runPuppy 5s linear forwards;
+
+}
+
+
+@keyframes runPuppy{
+
+0%{
+
+transform:translateX(-120vw);
+
+}
+
+70%{
+
+transform:translateX(0);
+
+}
+
+100%{
+
+transform:scale(1.2);
+
+}
+
+}
+
+/* ===========================
+CLICK BUTTON
+=========================== */
+
+#startBtn{
+
+display:none;
+
+margin-top:40px;
+
+padding:18px 45px;
+
+font-size:24px;
+
+border:none;
+
+border-radius:50px;
+
+background: #e91e63;;
+
+color:#FFFF;
+
+cursor:pointer;
+
+box-shadow:0 0 25px crimson;
+
+transition:.4s;
+
+}
+
+#startBtn:hover{
+
+transform:scale(1.1);
+
+background:#ff1744;
+
+}
+
+/* ===========================
+MAIN SECTION
+=========================== */
+
+#mainContent{
+
+display:none;
+
+padding:50px 20px;
+
+}
+
+.title{
+
+font-size:60px;
+
+text-shadow:0 0 20px #c2185b;
+
+margin-bottom:15px;
+
+}
+
+.dob{
+
+font-size:28px;
+
+margin-bottom:60px;
+
+color: #ff8f00;
+
+}
+
+/* ===========================
+PHOTO SECTION
+=========================== */
+
+.photoSection{
+
+margin:70px auto;
+
+max-width:900px;
+
+animation:fadeUp 1.5s ease;
+
+}
+
+.photo{
+
+width:340px;
+
+max-width:90%;
+
+border-radius:25px;
+
+box-shadow:0 0 30px rgba(255,255,255,.6);
+
+transition:.5s;
+
+}
+
+.photo:hover{
+
+transform:scale(1.05);
+
+}
+/* ===========================
+MESSAGE BOX
+=========================== */
+
+.messageBox{
+
+margin:35px auto;
+
+width:90%;
+
+max-width:900px;
+
+background:rgba(255,255,255,.18);
+
+backdrop-filter:blur(10px);
+
+padding:30px;
+
+border-radius:25px;
+
+box-shadow:0 0 30px rgba(255,255,255,.35);
+
+}
+
+.messageBox h2{
+
+font-size:34px;
+
+margin-bottom:20px;
+
+
+text-shadow:0 0 15px #d81b60;
+
+}
+
+.messageBox p{
+
+font-size:22px;
+color:#212121;
+line-height:2;
+
+white-space:pre-line;
+
+}
+
+/* ===========================
+LOVE LETTER
+=========================== */
+
+.loveLetter{
+
+margin:90px auto;
+
+padding:40px;
+
+width:92%;
+
+max-width:950px;
+
+background:rgba(255,255,255,.15);
+
+border-radius:30px;
+
+backdrop-filter:blur(12px);
+
+box-shadow:0 0 35px rgba(255,255,255,.3);
+
+animation:fadeUp 2s ease;
+
+}
+
+.loveLetter h1{
+
+font-size:44px;
+
+margin-bottom:30px;
+
+color:#7B1FA2;
+
+text-shadow:0 0 20px #7B1FA2;
+
+}
+
+.loveLetter p{
+
+font-size:24px;
+color:#37474F;
+line-height:2.1;
+
+white-space:pre-line;
+
+}
+
+/* ===========================
+ENDING
+=========================== */
+
+.ending{
+margin:100px auto;
+
+padding:40px;
+
+}
+
+.ending h1{
+
+font-size:52px;
+
+text-shadow:0 0 25px #e53935;
+
+margin-bottom:25px;
+
+}
+
+.ending h2{
+
+font-size:34px;
+color:#AD1457;
+margin-bottom:25px;
+
+}
+
+.endingText{
+
+font-size:24px;
+color:#263238;
+line-height:2.2;
+
+white-space:pre-line;
+
+}
+
+.signature{
+
+margin-top:40px;
+
+text-shadow:0 0 20px #5E35B1;
+
+}
+
+/* ===========================
+FOOTER
+=========================== */
+
+footer{
+
+margin:80px 0 30px;
+
+font-size:20px;
+
+color:#6D4C41;
+
+}
+
+/* ===========================
+ANIMATIONS
+=========================== */
+
+@keyframes fadeUp{
+
+from{
+
+opacity:0;
+
+transform:translateY(80px);
+
+}
+
+to{
+
+opacity:1;
+
+transform:translateY(0);
+
+}
+
+}
+
+@keyframes glow{
+
+from{
+
+text-shadow:0 0 10px white;
+
+}
+
+to{
+
+text-shadow:0 0 35px crimson,
+0 0 60px pink;
+
+}
+}
