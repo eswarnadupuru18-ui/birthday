@@ -12,107 +12,111 @@ const music = document.getElementById("bgMusic");
 
 const hearts = document.querySelector(".hearts");
 
+
 /* ==========================
    SHOW BUTTON
 ========================== */
 
-window.onload = () => {
+window.addEventListener("load", () => {
 
-setTimeout(() => {
+    setTimeout(() => {
 
-startBtn.style.display = "inline-block";
+        startBtn.style.display = "inline-block";
+        startBtn.style.animation = "fadeButton 0.6s ease";
 
-startBtn.style.animation = "fadeButton 1s ease";
+    }, 3000);
 
-},5000);
+});
 
-};
 
 /* ==========================
    BUTTON CLICK
 ========================== */
 
-startBtn.addEventListener("click",()=>{
+startBtn.addEventListener("click", () => {
 
-music.play();
+    if (music) {
+        music.play().catch(() => {});
+    }
 
-intro.style.display="none";
+    intro.style.display = "none";
+    mainContent.style.display = "block";
 
-mainContent.style.display="block";
+    window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+    });
 
-window.scrollTo({
-
-top:0,
-
-behavior:"smooth"
+    setTimeout(() => {
+        scrolling = true;
+        autoScroll();
+    }, 1000);
 
 });
 
-});
 
 /* ==========================
    FLOATING HEARTS
+   MOBILE OPTIMIZED
 ========================== */
 
-function createHeart(){
+function createHeart() {
 
-const heart=document.createElement("div");
+    const heart = document.createElement("div");
 
-heart.className="heart";
+    heart.className = "heart";
+    heart.innerHTML = "❤️";
 
-heart.innerHTML="❤️";
+    heart.style.left = Math.random() * 100 + "vw";
+    heart.style.fontSize = (18 + Math.random() * 20) + "px";
+    heart.style.animationDuration = (3 + Math.random() * 2) + "s";
 
-heart.style.left=Math.random()*100+"vw";
+    document.body.appendChild(heart);
 
-heart.style.fontSize=(20+Math.random()*30)+"px";
-
-heart.style.animationDuration=(5+Math.random()*5)+"s";
-
-document.body.appendChild(heart);
-
-setTimeout(()=>{
-
-heart.remove();
-
-},9000);
-
+    setTimeout(() => {
+        heart.remove();
+    }, 5500);
 }
 
-setInterval(createHeart,350);
+setInterval(createHeart, 700);
+
 
 /* ==========================
    PHOTO ANIMATION
 ========================== */
 
-const photos=document.querySelectorAll(".photo");
+const photos = document.querySelectorAll(".photo");
 
-const observer=new IntersectionObserver((entries)=>{
+const observer = new IntersectionObserver((entries) => {
 
-entries.forEach(entry=>{
+    entries.forEach(entry => {
 
-if(entry.isIntersecting){
+        if (entry.isIntersecting) {
 
-entry.target.style.opacity="1";
+            entry.target.style.opacity = "1";
+            entry.target.style.transform = "scale(1)";
 
-entry.target.style.transform="scale(1)";
+            observer.unobserve(entry.target);
+        }
 
-}
+    });
+
+}, {
+    threshold: 0.15
+});
+
+
+photos.forEach(photo => {
+
+    photo.style.opacity = "0";
+    photo.style.transform = "scale(0.85)";
+    photo.style.transition = "opacity 0.6s ease, transform 0.6s ease";
+
+    observer.observe(photo);
 
 });
 
-});
 
-photos.forEach(photo=>{
-
-photo.style.opacity="0";
-
-photo.style.transform="scale(.8)";
-
-photo.style.transition="1s";
-
-observer.observe(photo);
-
-});
 /* ==========================
    BUTTON ANIMATION
 ========================== */
@@ -121,23 +125,17 @@ const style = document.createElement("style");
 
 style.innerHTML = `
 
-@keyframes fadeButton{
+@keyframes fadeButton {
 
-from{
+    from {
+        opacity: 0;
+        transform: scale(0.5);
+    }
 
-opacity:0;
-
-transform:scale(.5);
-
-}
-
-to{
-
-opacity:1;
-
-transform:scale(1);
-
-}
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
 
 }
 
@@ -145,173 +143,178 @@ transform:scale(1);
 
 document.head.appendChild(style);
 
+
 /* ==========================
    SPARKLES
+   MOBILE OPTIMIZED
 ========================== */
 
-function createSparkle(){
+function createSparkle() {
 
-const sparkle=document.createElement("div");
+    const sparkle = document.createElement("div");
 
-sparkle.innerHTML="✨";
+    sparkle.innerHTML = "✨";
 
-sparkle.style.position="fixed";
+    sparkle.style.position = "fixed";
+    sparkle.style.left = Math.random() * 100 + "vw";
+    sparkle.style.top = Math.random() * 100 + "vh";
+    sparkle.style.fontSize = (10 + Math.random() * 14) + "px";
+    sparkle.style.pointerEvents = "none";
+    sparkle.style.transition = "0.8s";
+    sparkle.style.zIndex = "999";
 
-sparkle.style.left=Math.random()*100+"vw";
+    document.body.appendChild(sparkle);
 
-sparkle.style.top=Math.random()*100+"vh";
+    requestAnimationFrame(() => {
 
-sparkle.style.fontSize=(12+Math.random()*18)+"px";
+        sparkle.style.opacity = "0";
+        sparkle.style.transform = "scale(1.5)";
 
-sparkle.style.pointerEvents="none";
+    });
 
-sparkle.style.transition="2s";
-
-document.body.appendChild(sparkle);
-
-setTimeout(()=>{
-
-sparkle.style.opacity="0";
-
-sparkle.style.transform="scale(2)";
-
-},100);
-
-setTimeout(()=>{
-
-sparkle.remove();
-
-},2200);
-
+    setTimeout(() => {
+        sparkle.remove();
+    }, 1000);
 }
 
-setInterval(createSparkle,500);
+setInterval(createSparkle, 900);
+
 
 /* ==========================
    BALLOONS
 ========================== */
 
-function balloon(){
+function balloon() {
 
-const b=document.createElement("div");
+    const b = document.createElement("div");
 
-b.innerHTML="💕";
+    b.innerHTML = "💕";
 
-b.style.position="fixed";
+    b.style.position = "fixed";
+    b.style.left = Math.random() * 100 + "vw";
+    b.style.bottom = "-60px";
+    b.style.fontSize = (25 + Math.random() * 15) + "px";
+    b.style.transition = "7s linear";
+    b.style.pointerEvents = "none";
+    b.style.zIndex = "998";
 
-b.style.left=Math.random()*100+"vw";
+    document.body.appendChild(b);
 
-b.style.bottom="-80px";
+    requestAnimationFrame(() => {
+        b.style.bottom = "110vh";
+    });
 
-b.style.fontSize=(30+Math.random()*20)+"px";
-
-b.style.transition="12s linear";
-
-document.body.appendChild(b);
-
-setTimeout(()=>{
-
-b.style.bottom="110vh";
-
-},100);
-
-setTimeout(()=>{
-
-b.remove();
-
-},13000);
-
+    setTimeout(() => {
+        b.remove();
+    }, 8000);
 }
 
-setInterval(balloon,3000);
+setInterval(balloon, 4000);
+
 
 /* ==========================
    FIREWORKS
 ========================== */
 
-function firework(){
+function firework() {
 
-const f=document.createElement("div");
+    const f = document.createElement("div");
 
-const icons=["✨","💖"];
+    const icons = ["✨", "💖"];
 
-f.innerHTML=icons[Math.floor(Math.random()*icons.length)];
+    f.innerHTML = icons[
+        Math.floor(Math.random() * icons.length)
+    ];
 
-f.style.position="fixed";
+    f.style.position = "fixed";
+    f.style.left = Math.random() * 100 + "vw";
+    f.style.top = Math.random() * 60 + "vh";
+    f.style.fontSize = (25 + Math.random() * 15) + "px";
+    f.style.pointerEvents = "none";
+    f.style.transition = "0.8s";
+    f.style.zIndex = "997";
 
-f.style.left=Math.random()*100+"vw";
+    document.body.appendChild(f);
 
-f.style.top=Math.random()*60+"vh";
+    requestAnimationFrame(() => {
 
-f.style.fontSize=(30+Math.random()*20)+"px";
+        f.style.transform = "scale(2)";
+        f.style.opacity = "0";
 
-document.body.appendChild(f);
+    });
 
-setTimeout(()=>{
-
-f.style.transform="scale(2.2)";
-
-f.style.opacity="0";
-
-},100);
-
-setTimeout(()=>{
-
-f.remove();
-
-},1800);
-
+    setTimeout(() => {
+        f.remove();
+    }, 1000);
 }
 
-setInterval(firework,2500);
+setInterval(firework, 3000);
+
 
 /* ==========================
    AUTO SCROLL
+   FASTER ON MOBILE
 ========================== */
 
-let scrolling=false;
+let scrolling = false;
 
-startBtn.addEventListener("click",()=>{
+function autoScroll() {
 
-setTimeout(()=>{
+    if (!scrolling) return;
 
-scrolling=true;
+    window.scrollBy(0, 4);
 
-autoScroll();
+    if (
+        window.innerHeight + window.scrollY <
+        document.body.scrollHeight - 5
+    ) {
 
-},2500);
+        requestAnimationFrame(autoScroll);
 
-});
+    } else {
 
-function autoScroll(){
+        scrolling = false;
 
-if(!scrolling) return;
-
-window.scrollBy({
-
-top:2,
-
-behavior:"auto"
-
-});
-
-if(window.innerHeight+window.scrollY<document.body.scrollHeight){
-
-requestAnimationFrame(autoScroll);
+    }
 
 }
 
-}
+
+/* ==========================
+   STOP AUTO SCROLL
+   WHEN USER TOUCHES SCREEN
+========================== */
+
+let touchStartY = 0;
+
+window.addEventListener("touchstart", (event) => {
+
+    touchStartY = event.touches[0].clientY;
+
+}, { passive: true });
+
+
+window.addEventListener("touchmove", (event) => {
+
+    const currentY = event.touches[0].clientY;
+
+    if (Math.abs(currentY - touchStartY) > 10) {
+        scrolling = false;
+    }
+
+}, { passive: true });
+
 
 /* ==========================
    FINAL MESSAGE
 ========================== */
 
-setTimeout(()=>{
+setTimeout(() => {
 
-console.log("Happy Birthday Madhu ❤️");
+    console.log("Happy Birthday Madhu ❤️");
 
-},10000);
+}, 10000);
+
 
 /* ==========================
    END
