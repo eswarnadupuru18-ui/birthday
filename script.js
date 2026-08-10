@@ -257,29 +257,36 @@ setInterval(firework, 3000);
 ========================== */
 
 let scrolling = false;
+let lastTime = 0;
 
-function autoScroll() {
+const isMobile = window.matchMedia("(max-width: 768px)").matches;
+
+// Adjust these numbers
+const scrollSpeed = isMobile ? 90 : 120; // pixels per second
+
+function autoScroll(time) {
 
     if (!scrolling) return;
 
-    window.scrollBy(0, 12);
+    if (!lastTime) {
+        lastTime = time;
+    }
+
+    const delta = time - lastTime;
+    lastTime = time;
+
+    window.scrollBy(0, (scrollSpeed * delta) / 1000);
 
     if (
         window.innerHeight + window.scrollY <
-        document.body.scrollHeight - 5
+        document.documentElement.scrollHeight - 2
     ) {
-
         requestAnimationFrame(autoScroll);
-
     } else {
-
         scrolling = false;
-
+        lastTime = 0;
     }
-
 }
-
-
 /* ==========================
    STOP AUTO SCROLL
    WHEN USER TOUCHES SCREEN
