@@ -262,7 +262,7 @@ function autoScroll() {
 
     if (!scrolling) return;
 
-    window.scrollBy(0, 25);
+    window.scrollBy(0, 3);
 
     if (
         window.innerHeight + window.scrollY <
