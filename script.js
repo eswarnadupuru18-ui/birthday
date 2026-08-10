@@ -266,7 +266,7 @@ let lastTime = 0;
 const isMobile = window.matchMedia("(max-width: 768px)").matches;
 
 // Speed in pixels per second
-const scrollSpeed = isMobile ? 170 : 140;
+const scrollSpeed = isMobile ? 230 : 160;
 
 function autoScroll(time) {
 
