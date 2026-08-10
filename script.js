@@ -255,14 +255,18 @@ setInterval(firework, 3000);
    AUTO SCROLL
    FASTER ON MOBILE
 ========================== */
+/* ==========================
+   AUTO SCROLL
+   SMOOTH + MOBILE OPTIMIZED
+========================== */
 
 let scrolling = false;
 let lastTime = 0;
 
 const isMobile = window.matchMedia("(max-width: 768px)").matches;
 
-// Adjust these numbers
-const scrollSpeed = isMobile ? 90 : 120; // pixels per second
+// Speed in pixels per second
+const scrollSpeed = isMobile ? 170 : 140;
 
 function autoScroll(time) {
 
@@ -272,21 +276,57 @@ function autoScroll(time) {
         lastTime = time;
     }
 
-    const delta = time - lastTime;
+    let delta = time - lastTime;
+
+    // Prevent sudden jumps
+    if (delta > 50) {
+        delta = 50;
+    }
+
     lastTime = time;
 
-    window.scrollBy(0, (scrollSpeed * delta) / 1000);
+    const currentPosition = window.scrollY;
+
+    const nextPosition =
+        currentPosition + (scrollSpeed * delta / 1000);
+
+    window.scrollTo(0, nextPosition);
 
     if (
         window.innerHeight + window.scrollY <
         document.documentElement.scrollHeight - 2
     ) {
+
         requestAnimationFrame(autoScroll);
+
     } else {
+
         scrolling = false;
         lastTime = 0;
     }
 }
+
+
+/* ==========================
+   START AUTO SCROLL
+========================== */
+
+startBtn.addEventListener("click", () => {
+
+    setTimeout(() => {
+
+        // Disable CSS smooth scrolling
+        document.documentElement.style.scrollBehavior = "auto";
+
+        scrolling = true;
+        lastTime = 0;
+
+        requestAnimationFrame(autoScroll);
+
+    }, 1500);
+
+});
+
 /* ==========================
    STOP AUTO SCROLL
    WHEN USER TOUCHES SCREEN
